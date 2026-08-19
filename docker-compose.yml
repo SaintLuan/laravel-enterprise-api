@@ -6,6 +6,10 @@ services:
     container_name: lea-app
     restart: unless-stopped
     working_dir: /var/www/html
+    command: >
+      sh -c "mkdir -p storage/framework/cache/data storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
+      && chmod -R a+rwX storage bootstrap/cache
+      && exec php-fpm"
     volumes:
       - ./:/var/www/html
     environment:

@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: Laravel Enterprise API
+  description: |
+    Enterprise REST API for managing customers, products, and orders.
+
+    This specification currently documents the foundation endpoints.
+    Customer, Product, and Order resources will be added in later stages.
+  version: 1.0.0
+
+servers:
+  - url: /api/v1
+    description: Version 1
+
+tags:
+  - name: Health
+    description: Application status
+
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Health check
+      description: Returns the current application health status.
+      operationId: getHealth
+      responses:
+        '200':
+          description: Application is healthy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+              example:
+                status: ok
+                application: Laravel Enterprise API
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required:
+        - status
+        - application
+      properties:
+        status:
+          type: string
+          example: ok
+        application:
+          type: string
+          example: Laravel Enterprise API
